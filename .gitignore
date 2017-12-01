@@ -3,6 +3,6 @@ __pycache__
 *.pyc
 daemon*
 *.bak
-*/log/*
+*log/*
 *.idea
 *.sublime*
