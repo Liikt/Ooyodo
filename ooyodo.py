@@ -11,7 +11,7 @@ from functions.reminder import pvp, quests
 
 # Global vars
 name = "Ooyodo"
-game = "Nothing"
+game = "with Tanaka's wild ride"
 client = discord.Client()
 
 
