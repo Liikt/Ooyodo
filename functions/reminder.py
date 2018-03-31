@@ -114,7 +114,7 @@ async def quests(client):
                 quests = 'monthly, ' + quests
 
             # Check if the quarterly quests are also resetting
-            if gmtime(time()).tm_mon in [3, 6, 9, 12]:
+            if gmtime(time()).tm_mon in [2, 5, 8, 11]:
                 quests = 'quarterly, ' + quests
 
         # TODO: Handle february and leap years
