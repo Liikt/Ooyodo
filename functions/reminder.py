@@ -82,7 +82,7 @@ async def quests(client):
     if len(channels) != len(channel_ids):
         for channelname, _, id in channels:
             if id not in channel_ids:
-                log('WARN', 'quests', "Couldn't find channel with channelname: and id: {}"\
+                log('WARN', 'quests', "Couldn't find channel with channelname: {} and id: {}"\
                     .format(channelname, id))
 
     # Debug log
