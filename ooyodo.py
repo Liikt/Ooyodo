@@ -7,6 +7,7 @@ import os
 from utils.secret import key
 from utils.utils import async_concurrent, setup
 from functions.reminder import pvp, quests
+from functions.subscribe import toggle_user
 
 
 # Global vars
@@ -40,6 +41,13 @@ Takes the current message as a parameter
 """
 @client.event
 async def on_message(message):
-    pass
+    # Make sure we only react on public channels, the message is addressed to us and not from a bot as per discord TOS
+    if not message.channel.is_private and client.user in message.mentions and not message.author.bot:
+        m = " ".join(message.content.split()[1:])
+
+        if len(m) >= 1:
+            if m.split()[0] in ["subscribe", "unsubscribe"]:
+                await toggle_user(client, message, m.split()[0])
+
 
 client.run(key)
