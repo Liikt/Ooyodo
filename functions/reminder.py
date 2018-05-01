@@ -3,7 +3,7 @@ import asyncio
 from time import gmtime, time, sleep
 
 from utils.logger import log
-from utils.utils import get_channel_by_id, get_channel_by_ids
+from utils.utils import get_channel_by_id, get_channel_by_ids, get_subscriber_role_by_channel
 
 
 """
@@ -113,12 +113,54 @@ async def quests(client):
             else:
                 quests = 'monthly, ' + quests
 
+            # Send a reminder a month in advance for the quarterlies
+            if gmtime(time()).tm_mon in [1, 4, 7, 10]:
+                for channelname, channel, _ in channels:
+                    role = get_subscriber_role_by_channel(client, channel)
+                    desc = ":exclamation: You have a month left on your quarterly quests. I hope you weren't lazying around Admiral."
+                    embed = discord.Embed(description=desc, color=discord.Colour(0xffff00))
+                    if role not None:
+                        await client.send_message(channel, role.mention, embed=embed)
+                    else:
+                        await client.send_message(channel, embed=embed)
+
+                    log('INFO', 'quests', 'Sending reminder for a month of the quarterlies in {}'\
+                        .format(channelname))
+
             # Check if the quarterly quests are also resetting
             if gmtime(time()).tm_mon in [2, 5, 8, 11]:
                 quests = 'quarterly, ' + quests
 
+        # Send a reminder after 10 days into the month
+        if gmtime(time()).tm_mday == 10:
+            for channelname, channel, _ in channels:
+                role = get_subscriber_role_by_channel(client, channel)
+                desc = ":exclamation: I hope you are already done with a third of your monthlies. If not you should get moving. We alread have the 10th."
+                embed = discord.Embed(description=desc, color=discord.Colour(0xffff00))
+                if role not None:
+                    await client.send_message(channel, role.mention, embed=embed)
+                else:
+                    await client.send_message(channel, embed=embed)
+
+                log('INFO', 'quests', 'Sending reminder for 1/3rd of the month in {}'\
+                    .format(channelname))
+
+        # Send a reminder after 20 days into the month
+        elif gmtime(time()).tm_mday == 20:
+            for channelname, channel, _ in channels:
+                role = get_subscriber_role_by_channel(client, channel)
+                desc = ":exclamation: We are already two thirds through the month. Your quests should be aswell.".
+                embed = discord.Embed(description=desc, color=discord.Colour(0xffff00))
+                if role not None:
+                    await client.send_message(channel, role.mention, embed=embed)
+                else:
+                    await client.send_message(channel, embed=embed)
+
+                log('INFO', 'quests', 'Sending reminder for 2/3rd of the month in {}'\
+                    .format(channelname))
+
         # Check if it's the last day of the month or a week before
-        if gmtime(time()).tm_mday in [23, 29]:
+        elif gmtime(time()).tm_mday in [23, 29]:
             # Set the placeholders
             temp = 'monthly'
             remaining = 'week'
