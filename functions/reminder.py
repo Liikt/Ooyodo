@@ -117,7 +117,6 @@ async def quests(client):
             if gmtime(time()).tm_mon in [2, 5, 8, 11]:
                 quests = 'quarterly, ' + quests
 
-        # TODO: Handle february and leap years
         # Check if it's the last day of the month or a week before
         if gmtime(time()).tm_mday in [23, 29]:
             # Set the placeholders
