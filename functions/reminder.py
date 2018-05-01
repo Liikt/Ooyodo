@@ -119,7 +119,7 @@ async def quests(client):
                     role = get_subscriber_role_by_channel(client, channel)
                     desc = ":exclamation: You have a month left on your quarterly quests. I hope you weren't lazying around Admiral."
                     embed = discord.Embed(description=desc, color=discord.Colour(0xffff00))
-                    if role not None:
+                    if role:
                         await client.send_message(channel, role.mention, embed=embed)
                     else:
                         await client.send_message(channel, embed=embed)
@@ -137,7 +137,7 @@ async def quests(client):
                 role = get_subscriber_role_by_channel(client, channel)
                 desc = ":exclamation: I hope you are already done with a third of your monthlies. If not you should get moving. We alread have the 10th."
                 embed = discord.Embed(description=desc, color=discord.Colour(0xffff00))
-                if role not None:
+                if role:
                     await client.send_message(channel, role.mention, embed=embed)
                 else:
                     await client.send_message(channel, embed=embed)
@@ -151,7 +151,7 @@ async def quests(client):
                 role = get_subscriber_role_by_channel(client, channel)
                 desc = ":exclamation: We are already two thirds through the month. Your quests should be aswell.".
                 embed = discord.Embed(description=desc, color=discord.Colour(0xffff00))
-                if role not None:
+                if role:
                     await client.send_message(channel, role.mention, embed=embed)
                 else:
                     await client.send_message(channel, embed=embed)
