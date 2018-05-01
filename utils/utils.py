@@ -92,9 +92,20 @@ def get_channel_by_ids(client, ids):
     # Return the return list
     return ret
 
-def get_subscriber_role_by_channel(client, channel):
+
+"""
+get_subscriber_role_by_channel will return the role that is to be pinged on certain quarterly and
+monthly reminders based of a channel.
+
+It takes a channel object which is the channel ooyodo is supposed to send the reminders to.
+
+It returns the role to be mentioned
+"""
+def get_subscriber_role_by_channel(channel):
+    # Create a dict which maps the name to the actual role
     rolemap = {x.name: x for x in channel.server.roles}
 
+    # Find the role
     for role in subscribe_set:
         if role in rolemap.keys():
             return rolemap[role]
