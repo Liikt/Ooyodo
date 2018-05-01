@@ -2,6 +2,7 @@ import discord
 import asyncio
 
 from utils.logger import log
+from functions.subscribe import subscribe_set
 
 
 """
@@ -90,3 +91,12 @@ def get_channel_by_ids(client, ids):
 
     # Return the return list
     return ret
+
+def get_subscriber_role_by_channel(client, channel):
+    rolemap = {x.name: x for x in channel.server.roles}
+
+    for role in subscribe_set:
+        if role in rolemap.keys():
+            return rolemap[role]
+
+    return None
