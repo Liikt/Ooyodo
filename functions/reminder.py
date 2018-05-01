@@ -149,7 +149,7 @@ async def quests(client):
         elif gmtime(time()).tm_mday == 20:
             for channelname, channel, _ in channels:
                 role = get_subscriber_role_by_channel(client, channel)
-                desc = ":exclamation: We are already two thirds through the month. Your quests should be aswell.".
+                desc = ":exclamation: We are already two thirds through the month. Your quests should be aswell."
                 embed = discord.Embed(description=desc, color=discord.Colour(0xffff00))
                 if role:
                     await client.send_message(channel, role.mention, embed=embed)
