@@ -120,8 +120,15 @@ async def quests(client):
                     desc = ":exclamation: You have a month left on your quarterly quests. I hope you weren't lazying around Admiral."
                     embed = discord.Embed(description=desc, color=discord.Colour(0xffff00))
                     if role:
+                        # check if the last message already is the one we are about to send
+                        async for message in client.logs_from(channel, limit=1):
+                            if message.embeds != [] and message.embed.description.contains(" ".join(desc.split()[1:])):
+                                return
                         await client.send_message(channel, role.mention, embed=embed)
                     else:
+                        async for message in client.logs_from(channel, limit=1):
+                            if message.embeds != [] and message.embed.description.contains(" ".join(desc.split()[1:])):
+                                return
                         await client.send_message(channel, embed=embed)
 
                     log('INFO', 'quests', 'Sending reminder for a month of the quarterlies in {}'\
@@ -138,8 +145,14 @@ async def quests(client):
                 desc = ":exclamation: I hope you are already done with a third of your monthlies. If not you should get moving. It's already the 10th."
                 embed = discord.Embed(description=desc, color=discord.Colour(0xffff00))
                 if role:
+                    async for message in client.logs_from(channel, limit=1):
+                        if message.embeds != [] and message.embed.description.contains(" ".join(desc.split()[1:])):
+                            return
                     await client.send_message(channel, role.mention, embed=embed)
                 else:
+                    async for message in client.logs_from(channel, limit=1):
+                        if message.embeds != [] and message.embed.description.contains(" ".join(desc.split()[1:])):
+                            return
                     await client.send_message(channel, embed=embed)
 
                 log('INFO', 'quests', 'Sending reminder for 1/3rd of the month in {}'\
@@ -152,8 +165,14 @@ async def quests(client):
                 desc = ":exclamation: We are already two thirds through the month. Your quests should be as well."
                 embed = discord.Embed(description=desc, color=discord.Colour(0xffff00))
                 if role:
+                    async for message in client.logs_from(channel, limit=1):
+                        if message.embeds != [] and message.embed.description.contains(" ".join(desc.split()[1:])):
+                            return
                     await client.send_message(channel, role.mention, embed=embed)
                 else:
+                    async for message in client.logs_from(channel, limit=1):
+                        if message.embeds != [] and message.embed.description.contains(" ".join(desc.split()[1:])):
+                            return
                     await client.send_message(channel, embed=embed)
 
                 log('INFO', 'quests', 'Sending reminder for 2/3rd of the month in {}'\
@@ -179,6 +198,9 @@ async def quests(client):
             for channelname, channel, _ in channels:
                 desc = ":exclamation:  Admiral, {} quests will reset in about one {}".format(temp, remaining)
                 embed = discord.Embed(description=desc, color=discord.Colour(0xffff00))
+                async for message in client.logs_from(channel, limit=1):
+                    if message.embeds != [] and message.embed.description.contains(" ".join(desc.split()[1:])):
+                        return
                 await client.send_message(channel, embed=embed)
                 log('INFO', 'quests', 'Sending reminder for {} in one {} in {}'\
                     .format(temp, remaining, channelname))
@@ -187,6 +209,9 @@ async def quests(client):
         for _, channel, _ in channels:
             desc = ":exclamation:  Admiral, {} quests will reset in about 30 minutes".format(quests)
             embed = discord.Embed(description=desc, color=discord.Colour(0xffff00))
+            async for message in client.logs_from(channel, limit=1):
+                if message.embeds != [] and message.embed.description.contains(" ".join(desc.split()[1:])):
+                    return
             await client.send_message(channel, embed=embed)
 
         # wait the 30 minutes
@@ -196,6 +221,9 @@ async def quests(client):
         for channelname, channel, _ in channels:
             desc = ":exclamation:  Admiral, {} quests have reset".format(quests)
             embed = discord.Embed(description=desc, color=discord.Colour(0x00ff00))
+            async for message in client.logs_from(channel, limit=1):
+                if message.embeds != [] and message.embed.description.contains(" ".join(desc.split()[1:])):
+                    return
             await client.send_message(channel, embed=embed)
             log('INFO', 'quests', 'Sending reminder for {} quests in {}'.format(quests, channelname))
 
