@@ -6,3 +6,4 @@ daemon*
 *log/*
 *.idea
 *.sublime*
+.vscode/
