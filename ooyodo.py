@@ -8,6 +8,7 @@ from utils.secret import key
 from utils.utils import async_concurrent, setup
 from functions.reminder import pvp, quests
 from functions.subscribe import toggle_user
+from functions.debug import debug
 
 
 # Global vars
@@ -48,6 +49,8 @@ async def on_message(message):
         if len(m) >= 1:
             if m.split()[0] in ["subscribe", "unsubscribe"]:
                 await toggle_user(client, message, m.split()[0])
-
+            
+            if m.split()[0] == "debug" and "liikt" in message.author.name.lower():
+                await debug(client, message)
 
 client.run(key)
