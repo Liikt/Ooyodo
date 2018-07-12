@@ -9,6 +9,7 @@ from utils.utils import async_concurrent, setup
 from functions.reminder import pvp, quests
 from functions.subscribe import toggle_user
 from functions.debug import debug
+from functions.meme import *
 
 
 # Global vars
@@ -52,5 +53,8 @@ async def on_message(message):
             
             if m.split()[0] == "debug" and "liikt" in message.author.name.lower():
                 await debug(client, message)
+
+            if m.split()[0].startswith("maint"):
+                await maint_meme(client, message)
 
 client.run(key)
