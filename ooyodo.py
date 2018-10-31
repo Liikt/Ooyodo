@@ -50,11 +50,14 @@ async def on_message(message):
         if len(m) >= 1:
             if m.split()[0] in ["subscribe", "unsubscribe"]:
                 await toggle_user(client, message, m.split()[0])
-            
+
             if m.split()[0] == "debug" and "liikt" in message.author.name.lower():
                 await debug(client, message)
 
             if m.split()[0].startswith("maint"):
                 await maint_meme(client, message)
+
+            if m.split()[0].startswith("headpat"):
+                await headpat(client, message)
 
 client.run(key)

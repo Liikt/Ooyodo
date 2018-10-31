@@ -1,5 +1,6 @@
 import discord
 import asyncio
+import random
 
 from random import randint
 
@@ -18,3 +19,18 @@ async def maint_meme(client, message):
     )
 
     await client.send_message(message.channel, embed=embed)
+
+"""
+Headpats, cause why not.
+"""
+async def headpat(client, message):
+
+    rng = random.randint(0, 2)
+
+    embed = {
+        0: discord.Embed(color=discord.Colour(0xF4BBCF), description="A-Admiral! my glasses!"),
+        1: discord.Embed(color=discord.Colour(0xF4BBCF), description="All this unnecessary touching, it reflects poorly on you as the fleet command"),
+        2: discord.Embed(color=discord.Colour(0xF4BBCF), description="...")
+    }
+
+    await client.send_message(message.channel, embed=embed[rng])
